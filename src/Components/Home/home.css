@@ -1,0 +1,90 @@
+/* -----------Eye Catcher--------------- */
+
+.eyeCatcher1,
+.eyeCatcher2 {
+  display: flex;
+  white-space: nowrap;
+  justify-content: center;
+  align-items: center;
+  background-color: #202225;
+  width: 100vw;
+  height: 8%;
+  color: white;
+}
+
+.fruits {
+  width: 20%;
+  height: 20%;
+  padding: 1%;
+}
+.truck {
+  width: 10%;
+  height: 10%;
+  padding: 1%;
+}
+.eyeCatcher1 h1,
+.eyeCatcher2 h1 {
+  font-size: inherit;
+}
+.spanClass {
+  color: yellow;
+}
+
+/* ------------Offers------------- */
+
+
+.offerContainer {
+    display: none;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    width: 80vw;
+    margin: 20px auto;
+  }
+  .product-detail {
+    margin-right: 10px;
+  }
+  .header2,
+  .footer {
+    background-color: #db6400;
+    text-align: center;
+    color: white;
+    font-style: cursive;
+    border-radius: 10px;
+  }
+  h5,
+  h6 {
+    margin: 0;
+    font-size: 20px;
+  }
+  .oldPriceClass {
+    text-decoration: line-through;
+  }
+  .offerContainerImage {
+    width: 280px;
+    height: 300px;
+    border-radius: 10px;
+  }
+
+/* ---------Code Carousel/Code Use----------- */
+.codeUse {
+  width: 100vw;
+  margin-top: 20px;
+  background-color: white;
+}
+.codeUse img {
+  width: 100%;
+}
+
+
+/* -----------------------RESPONSIVE DESIGN------------------------- */
+
+@media screen and (min-width:1000px){
+  /* ----Eye Catcher----- */
+  .eyeCatcher1,.eyeCatcher2{
+    font-size: xxx-large;
+  }
+  .offerContainer{
+    display: flex;
+  }
+
+}

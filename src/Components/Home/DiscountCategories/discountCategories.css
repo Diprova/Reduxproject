@@ -1,0 +1,72 @@
+/*--------------- Discount Categories---------------- */
+.discountlistContainer {
+  display: flex;
+  flex-flow: column wrap;
+  background-color: rgb(245, 239, 183);
+  width: 100vw;
+  margin-top: 20px;
+  padding: 0;
+}
+
+.discountList {
+  display: flex;
+  width: 100%;
+  background-color: white;
+  border-right: 1px solid rgb(236, 224, 224);
+}
+
+.inactive {
+  background-color: white;
+}
+.active {
+  background-color: rgb(245, 239, 183);
+  border-right: none;
+}
+
+.discountList img {
+  width: 150px;
+  height: 150px;
+  margin: 2%;
+}
+
+.listDetails {
+  width: 80%;
+}
+
+.listDetails p {
+  margin: 5px 0;
+}
+.listbtn {
+  display: flex;
+  justify-content: center;
+  border: none;
+  color: #db6400;
+  align-items: center;
+  width: 40px;
+}
+.cardBoxDetails {
+  display: flex;
+  flex-flow: row wrap;
+  width: 98%;
+  border: none;
+  background-color: white;
+  box-shadow: 0 0 1px grey;
+  margin: 10px 12px;
+}
+.cardBox img {
+  width: 30%;
+  height: 30%;
+}
+.cardBox {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  width: 20%;
+  height: 50%;
+  border-left: 1px solid rgb(214, 205, 205);
+  border-bottom: 1px solid rgb(214, 205, 205);
+  font-size: 13px;
+}
+.cardBox:last-child {
+  border-right: 1px solid rgb(214, 205, 205);
+}

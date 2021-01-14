@@ -1,0 +1,230 @@
+/* -------------Dashboard----------------- */
+
+.category-header {
+  display: none;
+  flex-flow: row wrap;
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 0 5px grey;
+  margin:0 -20px;
+}
+.market {
+  display: flex;
+  justify-content: flex-end;
+  width: 250px;
+  padding: 12px 15px 12px 36px;
+  border-right: 1px solid rgb(180, 175, 175);
+}
+.market span {
+  padding-left: 9px;
+}
+.item {
+  padding: 12px 12px 12px 12px;
+  cursor: pointer;
+}
+.item span {
+  padding: 0 8px;
+}
+.dropdown-item {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 1px 1px 3px grey;
+  height: 120px;
+  width: 250px;
+  position: fixed;
+  z-index: 1060;
+  margin-top: 50px;
+  right: 230px;
+  overflow-y: auto;
+  cursor: pointer;
+}
+.dropdown-item p {
+  border-bottom: 1px solid rgb(230, 221, 221);
+  padding: 10px 2px 10px 40px;
+}
+.dropdown-item p:last-child {
+  border-bottom: none;
+  margin-bottom: 1px;
+}
+.dashboard-category {
+  background-color: white;
+  height: 150px;
+}
+/*-------------- Reviews-------------- */
+.reviews {
+  background-color: white;
+  width: 100vw;
+  margin-bottom: 10px;
+  padding: 90px 0 10px 0;
+  margin:0 -20px;
+}
+.review-categoryName {
+  font-size: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 500;
+  color: rgb(56, 55, 55);
+}
+.item-review {
+  display: flex;
+  flex-flow: column wrap;
+}
+.item-rating h6 {
+  font-size: 20px;
+  font-weight: 500;
+  color: rgb(56, 55, 55);
+}
+
+.item-rating p {
+  font-size: inherit;
+  color: rgb(168, 152, 152);
+  border-top: 1px solid rgb(168, 152, 152);
+}
+.reviews img {
+  width: 90%;
+}
+
+.item-price {
+  margin: 20px auto;
+}
+.productPrice {
+  font-size: 25px;
+  font-weight: 500;
+}
+.taxes {
+  font-size: 15px;
+  color: grey;
+  margin: 0;
+}
+.cart-button {
+  background-color: #db6400;
+  padding: 2px;
+  border: none;
+  color: white;
+  width: 90%;
+  height: 50px;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: cursive;
+  box-shadow: 3px 3px 3px 0 grey;
+  border-radius: 5px;
+}
+
+.quantity {
+  display: flex;
+  height: 50px;
+  width: 180px;
+  border-radius: 8px;
+  border: 1px solid #db6400;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #db6400;
+  margin: 10px 0;
+}
+.easy-returns {
+  margin: 20px 40px;
+  font-family: Helvetica;
+  font-size: inherit;
+  color: #33373d;
+}
+.easy-returns h6 {
+  font-size: large;
+}
+.easy-returns img {
+  width: 15% !important;
+  padding: 10px;
+}
+.refund,
+.lowest-price {
+  display: flex;
+}
+.refund p:first-child,
+.lowest-price p:first-child {
+  color: #37a3be;
+  font-weight: 600;
+  font-size: 14px;
+}
+.refund p:nth-child(2),
+.lowest-price p:nth-child(2) {
+  font-size: 12px;
+  color: #333;
+}
+
+/*-------- ROUTE PRODUCT DETAILS------------ */
+
+.product-curtain {
+  height: inherit;
+  overflow: auto;
+  right: 0;
+}
+.product-curtain::-webkit-scrollbar{
+  outline:0 !important;
+
+}
+.product-curtain h4 {
+  margin: 5%;
+  font-size: xx-large;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+.product-slot {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: space-between;
+  background-color: white;
+  margin:0 -20px 10px -20px;
+}
+.product-card {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  margin: 20px auto;
+}
+.category {
+  display: none;
+  width: 500px;
+  padding-top: 40px;
+  border-right: 1px solid rgb(240, 232, 232);
+}
+.category p {
+  padding: 10px 0;
+  text-align: center;
+  font-size: 20px;
+  border-bottom: 1px solid rgb(245, 236, 236);
+}
+/* ------------------RESPONSIVE DESIGN--------------------- */
+@media screen and (min-width:1000px){
+  /* ----Category Header------- */
+  .category-header{
+    display: flex;
+    flex-flow: row wrap;
+  }
+  .category-container{
+    background-color: white;
+    margin:0 -20px;
+  }
+ /* ------Reviews----- */
+ .reviews{
+   display: flex;
+   margin-bottom: 10px;
+ }
+ .item-review{
+   width:40%;
+   margin:0 auto;
+ }
+ .reviews img{
+   width:70%;
+   margin:inherit;
+ }
+ /* ------Route Product Details------ */
+ /* ---Category----- */
+ .category{
+   display: block;
+   margin:20px -20px;
+ }
+
+} 

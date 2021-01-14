@@ -1,0 +1,210 @@
+.product-details {
+  width: 100vw;
+  padding: 12px;
+  background-color: white;
+  display: flex;
+  flex-flow: column wrap;
+}
+.product-link {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+.product-link span {
+  font-size:x-large;
+  left: 30px;
+  font-weight: 500;
+}
+.see-all-btn {
+  padding: 10px;
+  background-color: transparent;
+  color: #db6400;
+  font-size: 18px;
+  cursor: pointer;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+
+.seeall-btn {
+  padding: 10px;
+  background-color: transparent;
+  color: #db6400;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.productCard {
+  display: flex;
+  width: 100%;
+  white-space: nowrap;
+  overflow-x: scroll;
+  margin: 20px 0;
+}
+.productCard::-webkit-scrollbar {
+  width: 0 !important;
+  display: none;
+}
+.cntrlbtn {
+  display: flex;
+}
+
+.addbtn {
+  display: flex;
+  width: 95%;
+  height: 30px;
+  margin-top: 10px;
+
+
+}
+.addbtn-btn {
+  background-color: #db6400;
+  flex-grow: 1;
+  border: none;
+  color: white;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.span-btn {
+  border: none;
+  width:20%;
+  background-color: rgb(191, 80, 31)!important;
+  color: white;
+  font-weight: 600;
+  font-size: 12px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+.cardsContent img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+  position: relative;
+  transition: all ease-in 0.4s;
+  top: 15px;
+  left: 70px;
+}
+.cardsContent {
+  padding: 0 15px;
+}
+.cardsContent:hover img {
+  top: -0.5px;
+}
+
+.incrmntbtn,
+.dcrmntbtn {
+  background-color: #db6400;
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  margin-top: 10px;
+  border-radius: 3px;
+}
+
+
+.spanCount {
+  display: flex;
+  justify-content: center;
+  margin: 10px 70px 0 70px;
+}
+
+.cards {
+  display: flex;
+  background-color: white;
+  flex: 0 0 auto;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  box-shadow: rgb(221, 221, 221) 0px 0px 10px;
+  margin: 2px 10px;
+  width: 240px;
+  height: 270px;
+}
+.seeAll-card {
+  display: flex;
+  justify-content: center;
+  width: 240px;
+  height: 270px;
+  box-shadow: 3px 5px 3px rgb(221, 221, 221);
+  padding: 0 90px;
+  margin-right: 10px;
+}
+
+.emergency-update {
+  background-color: rgb(246, 238, 246);
+  bottom: 0;
+  width: 240px;
+  height: 25px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-top: 1px solid rgb(238, 233, 233);
+  color: rgb(246, 238, 246);
+}
+/* ------------------------Dashboard Card------------------- */
+.dashboard-card {
+  display: flex;
+  width: 100vw;
+  white-space: nowrap;
+  overflow-x: scroll;
+  margin: 12px auto;
+  font-weight: monospace;
+  background-color: white;
+  border: 1px solid rgb(232, 223, 223);
+  margin:0 -20px;
+}
+.dashboard-card::-webkit-scrollbar {
+  width: 0 !important;
+  display: none;
+}
+
+.dashboardCard-content {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  width: 250px;
+  height: 300px;
+  background-color: white;
+  outline: 1px solid rgb(232, 223, 223);
+}
+
+.dashboardCard-content img {
+  width: 100px;
+  height: 100px;
+  margin: 3px 70px;
+  
+}
+.dashboardCard-content:hover img {
+  margin-top: -1px;
+}
+.addbutn {
+  background-color: white;
+  color: #db6400;
+  border: 1px solid #db6400;
+  border-radius: 20px;
+  margin-left: 60px;
+  width: 90px;
+  height: 40px;
+  font-size: 18px;
+}
+.addbutn:focus {
+  outline: 0 !important;
+  display: none;
+}
+.cntrlbutn {
+  margin-left: 60px;
+}
+.cntrlbutn button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #db6400;
+  border-radius: 50%;
+  background-color: transparent;
+  color: #db6400;
+}
+.cntrlbutn button:focus {
+  outline: 0 !important;
+  display: none;
+}
+.cntrlbutn span {
+  margin: 0 30px;
+}
