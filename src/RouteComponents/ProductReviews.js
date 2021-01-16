@@ -3,16 +3,16 @@ import refund from "../assets/return.webp";
 import lowestPrice from "../assets/lowest-price.webp";
 import "./stylesRoute.css";
 
-const ProductReviews = ({ itemId, context, item }) => {
+const ProductReviews = ({ itemId, products, item }) => {
   const [itemDetails, setitemDetails] = useState({});
 
   useEffect(() => {
-    setitemDetails(context.products.find((e) => e._id === itemId));
+    setitemDetails(products.find((e) => e._id === itemId));
   }, []);
 
   useEffect(() => {
-    if (context.products._id !== itemId) {
-      setitemDetails(context.products.find((e) => e._id === itemId));
+    if (products._id !== itemId) {
+      setitemDetails(products.find((e) => e._id === itemId));
     }
   }, [itemId]);
   console.log(itemDetails);

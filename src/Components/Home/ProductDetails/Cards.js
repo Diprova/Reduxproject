@@ -28,7 +28,7 @@ const Cards = ({ item, context }) => {
           </ul>
         </div>
 
-        <ProductButton context={context} item={item} />
+        <ProductButton  item={item} />
       </div>
       <div className="emergency-update">v</div>
     </div>

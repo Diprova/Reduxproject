@@ -3,20 +3,21 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import CartComponent from "./CartComponent";
 import emptyCart from "../assets/empty-cart.webp";
 import "./popupContents.css";
+import { connect } from "react-redux";
 
-const Cartcontent = ({ cartVisibility, setCartVisibility, context }) => {
+const Cartcontent = ({ cartVisibility, setCartVisibility, cart }) => {
   const showHideClassName = cartVisibility
     ? "modal display-block"
     : "modal display-none";
-
-  let subtotal = context.cart.reduce((n, { total }) => n + total + 49, 0);
+  console.log(cart)
+  let subtotal = cart.reduce((n, { total }) => n + total + 49, 0);
 
   return (
     <div className={showHideClassName} onClick={() => setCartVisibility(false)}>
       <div className="cart-content container">
         <button className="cartcontent-button">
           My Cart
-          <AiOutlineArrowRight onClick={() => setCartVisibility(false)}/>
+          <AiOutlineArrowRight onClick={() => setCartVisibility(false)} />
         </button>
 
         {subtotal === 0 ? (
@@ -30,12 +31,12 @@ const Cartcontent = ({ cartVisibility, setCartVisibility, context }) => {
             <div className="cart-total">
               <h3>
                 Cart Total:{" "}
-                {context.cart.reduce((n, { total }) => n + total, 0)}
+                {cart.reduce((n, { total }) => n + total, 0)}
               </h3>
               <p>Delivery Charges: ₹ 49</p>
               <div>Subtotal : {subtotal}</div>
             </div>
-            <CartComponent context={context} />
+            <CartComponent />
           </div>
         )}
         {subtotal === 0 ? (
@@ -55,5 +56,8 @@ const Cartcontent = ({ cartVisibility, setCartVisibility, context }) => {
     </div>
   );
 };
+const mapStateToProps = (state) => ({
+  cart: state.product.cart,
+});
 
-export default Cartcontent;
+export default connect(mapStateToProps, null)(Cartcontent);

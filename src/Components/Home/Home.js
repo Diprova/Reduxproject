@@ -7,16 +7,16 @@ import ProductCard from "./ProductDetails/ProductCard";
 import Category from "../Category/Category";
 import "./home.css";
 
-const Home = ({ context }) => {
+const Home = () => {
   
   return (
     <>
-      <Category context={context} />
+      <Category />
       <EyeCatcher />
       <Slide />
-      <ProductCard context={context} />
+      <ProductCard />
       <CodeUse />
-      <DiscountProducts context={context} />
+      <DiscountProducts />
     </>
   );
 };

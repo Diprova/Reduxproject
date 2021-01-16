@@ -1,9 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import "../App.css";
+import {
+  removeFromCart,
+  increment,
+  decrement,
+  removeFromTotal,
+  addTotal,
+  getItem,
+} from "../redux/action/product";
+import { connect } from "react-redux";
 
-const CartComponent = ({ context }) => {
-  const cart = context.cart;
-
+const CartComponent = ({
+  getItem,
+  removeFromCart,
+  increment,
+  decrement,
+  removeFromTotal,
+  addTotal,
+  cart,
+}) => {
+  console.log(cart);
   return (
     <div className="cart-block">
       {cart.map((item) => {
@@ -16,18 +32,17 @@ const CartComponent = ({ context }) => {
             <div className="cart-componentButton">
               <button
                 onClick={() => (
-                  context.decrement(item._id),
-                  item.count === 0 && context.removeFromCart(item._id),
-                  context.reduceFromTotal(item._id)
+                  getItem(item._id),
+                  decrement(),
+                  item.count === 0 && removeFromCart(),
+                  removeFromTotal()
                 )}
               >
                 -
               </button>
               <span>{item.count}</span>
               <button
-                onClick={() => (
-                  context.increment(item._id), context.addTotal(item._id)
-                )}
+                onClick={() => (getItem(item._id), increment(), addTotal())}
               >
                 +
               </button>
@@ -43,4 +58,17 @@ const CartComponent = ({ context }) => {
     </div>
   );
 };
-export default CartComponent;
+
+const mapStateToProps = (state) => ({
+  cart: state.product.cart,
+});
+
+const mapDispatchToProps = {
+  getItem,
+  increment,
+  decrement,
+  addTotal,
+  removeFromTotal,
+  removeFromCart,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(CartComponent);

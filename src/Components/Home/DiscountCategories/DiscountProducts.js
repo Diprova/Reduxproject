@@ -1,25 +1,25 @@
 import React, { useState, useEffect } from "react";
 import DiscountList from "./DiscountList";
 import "./discountCategories.css";
+import { getProduct } from "../../../redux/action/product";
+import { connect } from "react-redux";
 
-const DiscountProducts = ({ context }) => {
-  const [discountPrdct, setDiscoutPrdct] = useState([]);
-
+const DiscountProducts = ({ getProduct, products }) => {
   useEffect(() => {
-    setDiscoutPrdct([...context.products]);
+    getProduct();
   }, []);
-  useEffect(() => {
-    if (!context.products.length) {
-      context.getProduct();
-    }
-  }, [context.products]);
 
   return (
     <div>
-      {discountPrdct.map((item1) => {
-        return <DiscountList key={item1._id} item={item1} />;
-      })}
+      {products &&
+        products.map((item1) => {
+          return <DiscountList key={item1._id} item={item1} />;
+        })}
     </div>
   );
 };
-export default DiscountProducts;
+
+const mapStateToProps = (state) => ({
+  products: state.product.products,
+});
+export default connect(mapStateToProps, { getProduct })(DiscountProducts);

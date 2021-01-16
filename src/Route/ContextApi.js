@@ -23,21 +23,9 @@ export class ContextApi extends Component {
     this.state = {
       ...initialState,
       location: "Select city",
-      getCategory: async () => {
-        let res = await Rest.get("/api/category");
-        this.setState({ category: [...res], updatedCategory: [...res] });
-      },
-      getProduct: async () => {
-        let resp = await Rest.get("/api/product");
-        this.setState({ products: [...resp], updatedProducts: [...resp] });
-      },
+       
 
-      getItem: (id) => {
-        const selectedProduct = this.state.updatedProducts.findIndex(
-          (ele) => ele._id === id
-        );
-        return selectedProduct;
-      },
+     
 
       showItem: (item) => {
         const showitem = this.state.updatedProducts.find(
@@ -46,35 +34,9 @@ export class ContextApi extends Component {
         this.setState({ item: showitem.productName });
       },
 
-      increment: (id) => {
-        const productIndex = this.state.getItem(id);
-        const product = this.state.updatedProducts[productIndex];
-        product.count = product.count ? product.count + 1 : 1;
+      
 
-        this.setState({
-          updatedProducts: [
-            ...this.state.updatedProducts.slice(0, productIndex),
-            product,
-            ...this.state.updatedProducts.slice(productIndex + 1),
-          ],
-        });
-      },
-
-      decrement: (id) => {
-        if (this.state.updatedProducts) {
-          const productIndex = this.state.getItem(id);
-          const product = this.state.updatedProducts[productIndex];
-          product.count = product.count ? product.count - 1 : 1;
-
-          this.setState({
-            updatedProducts: [
-              ...this.state.updatedProducts.slice(0, productIndex),
-              product,
-              ...this.state.updatedProducts.slice(productIndex + 1),
-            ],
-          });
-        }
-      },
+      
       addToCart: (id) => {
         if (this.state.updatedProducts) {
           const productIndex = this.state.getItem(id);

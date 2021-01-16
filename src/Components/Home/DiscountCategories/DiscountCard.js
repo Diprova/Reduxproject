@@ -1,27 +1,25 @@
 import React, { useState, useEffect } from "react";
 import CardBox from "./CardBox";
-import Api from "../../../Utility/restapi";
+import { getProduct } from "../../../redux/action/product";
+import { connect } from "react-redux";
 
-const DiscountCard = () => {
-  const [cardItem, setCardItem] = useState([]);
-
+const DiscountCard = ({ getProduct, products }) => {
   useEffect(() => {
-    func();
+    getProduct();
   }, []);
-
-  const func = async () => {
-    let res = await Api.get("/api/product");
-    console.log(res);
-    setCardItem(res);
-  };
+  console.log(products);
 
   return (
     <div className="cardBoxDetails">
-      {cardItem.map((noofitems) => {
-        return <CardBox key={noofitems._id} noofitems={noofitems} />;
-      })}
+      {products &&
+        products.map((noofitems) => {
+          return <CardBox key={noofitems._id} noofitems={noofitems} />;
+        })}
     </div>
   );
 };
 
-export default DiscountCard;
+const mapStateToProps = (state) => ({
+  products: state.product.products
+});
+export default connect(mapStateToProps, { getProduct })(DiscountCard);

@@ -1,30 +1,42 @@
-import React, { useState } from "react";
+import React from "react";
+import {
+  increment,
+  decrement,
+  getItem,
+  addToCart,
+  removeFromCart,
+  addTotal,
+  removeFromTotal,
+} from "../../../redux/action/product";
+import { connect } from "react-redux";
 
-const ProductButton = ({ context, item }) => {
-  const [count, setCount] = useState(item.count);
-
-  const increment = () => {
-    return (
-      setCount(context.increment(item._id)),
-      context.addToCart(item._id),
-      context.addTotal(item._id)
-    );
+const ProductButton = ({
+  item,
+  increment,
+  decrement,
+  getItem,
+  addToCart,
+  removeFromCart,
+  addTotal,
+  removeFromTotal,
+}) => {
+  const handleIncrement = () => {
+    getItem(item._id), increment(),item.count===1 && addToCart(), addTotal();
   };
 
-  const decrement = () => {
-    return (
-      setCount(context.decrement(item._id)),
-      count === 1 && context.removeFromCart(item._id),
-      context.reduceFromTotal(item._id)
-    );
+  const handleDecrement = () => {
+    getItem(item._id),
+      decrement(),
+      item.count === 0 && removeFromCart(),
+      removeFromTotal();
   };
 
   const addbtn = (
     <div className="addbtn">
-      <button className="addbtn-btn" onClick={increment}>
+      <button className="addbtn-btn" onClick={handleIncrement}>
         Add
       </button>
-      <button className="span-btn" onClick={increment}>
+      <button className="span-btn" onClick={handleIncrement}>
         +
       </button>
     </div>
@@ -32,16 +44,25 @@ const ProductButton = ({ context, item }) => {
 
   const cntrlbtn = (
     <div className="cntrlbtn">
-      <button className="dcrmntbtn" onClick={decrement}>
+      <button className="dcrmntbtn" onClick={handleDecrement}>
         -
       </button>
-      <span className="spanCount">{count}</span>
-      <button className="incrmntbtn" onClick={increment}>
+      <span className="spanCount">{item.count}</span>
+      <button className="incrmntbtn" onClick={handleIncrement}>
         +
       </button>
     </div>
   );
-  return <div>{!count ? addbtn : cntrlbtn}</div>;
+  return <div>{!item.count ? addbtn : cntrlbtn}</div>;
 };
 
-export default ProductButton;
+const mapDispatchToProps = {
+  removeFromTotal,
+  addTotal,
+  removeFromCart,
+  addToCart,
+  getItem,
+  decrement,
+  increment,
+};
+export default connect(null, mapDispatchToProps)(ProductButton);

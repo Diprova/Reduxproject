@@ -2,18 +2,13 @@ import React, { useState, useEffect } from "react";
 import Cards from "./Cards";
 import { useHistory } from "react-router-dom";
 import "./productDetails.css";
+import { getProduct } from "../../../redux/action/product";
+import { connect } from "react-redux";
 
-const ProductCard = ({ context }) => {
-  const [product, setProduct] = useState([]);
-
+const ProductCard = ({ getProduct, products }) => {
   useEffect(() => {
-    setProduct([...context.products]);
+    getProduct();
   }, []);
-  useEffect(() => {
-    if (!context.products.length) {
-      context.getProduct();
-    }
-  }, [context.products]);
 
   let history = useHistory();
   return (
@@ -28,9 +23,10 @@ const ProductCard = ({ context }) => {
         </button>
       </div>
       <div className="productCard container">
-        {product.map((item) => {
-          return <Cards key={item._id} item={item} context={context} />;
-        })}
+        {products &&
+          products.map((item) => {
+            return <Cards key={item._id} item={item} />;
+          })}
         <div className="seeAll-card">
           <button
             className="seeall-btn"
@@ -43,4 +39,8 @@ const ProductCard = ({ context }) => {
     </div>
   );
 };
-export default ProductCard;
+
+const mapStateToProps = (state) => ({
+  products: state.product.updatedProducts,
+});
+export default connect(mapStateToProps, { getProduct })(ProductCard);

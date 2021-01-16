@@ -19,7 +19,7 @@ const PrimaryRoute = () => {
             <Route
               exact
               path="/"
-              component={() => <Home context={context} />}
+              component={() => <Home />}
             />
             <Route
               path="/dashboard"

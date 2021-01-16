@@ -6,6 +6,8 @@ import App from "./App";
 import "./App.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ContextApi } from "./Route/ContextApi";
+import store from "./redux/store";
+import { Provider } from "react-redux";
 
 const options = {
   position: "bottom center",
@@ -17,9 +19,11 @@ const options = {
 render(
   <AlertProvider template={AlertTemplate} {...options} position="bottom center">
     <ContextApi>
-      <Router>
-        <App />
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <App />
+        </Router>
+      </Provider>
     </ContextApi>
   </AlertProvider>,
   document.getElementById("root")

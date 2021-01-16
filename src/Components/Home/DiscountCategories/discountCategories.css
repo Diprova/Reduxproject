@@ -55,17 +55,15 @@
 }
 .cardBox img {
   width: 30%;
-  height: 30%;
 }
 .cardBox {
   display: flex;
   flex-flow: column wrap;
   align-items: center;
   width: 20%;
-  height: 50%;
   border-left: 1px solid rgb(214, 205, 205);
   border-bottom: 1px solid rgb(214, 205, 205);
-  font-size: 13px;
+  font-size: xx-small;
 }
 .cardBox:last-child {
   border-right: 1px solid rgb(214, 205, 205);

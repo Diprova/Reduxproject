@@ -6,14 +6,22 @@ import ProductReviews from "./ProductReviews";
 import { AiOutlineShop } from "react-icons/ai";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import "./stylesRoute.css";
+import { getCategory } from "../redux/action/category";
+import { connect } from "react-redux";
 
-const Dashboard = ({ location, context }) => {
+const Dashboard = ({
+  location,
+  getProduct,
+  getCategory,
+  category,
+  products,
+}) => {
   const [dropdownVisibility, setDropdownVisibility] = useState(false);
   useEffect(() => {
-    if (!context.products.length) {
-      context.getProduct();
-    }
-  }, [context.products]);
+    getCategory();
+  }, []);
+
+  console.log(category);
 
   const dropdownItem = (
     <div
@@ -22,9 +30,9 @@ const Dashboard = ({ location, context }) => {
         setDropdownVisibility(false);
       }}
     >
-      <p>{context.updatedCategory[5] && context.updatedCategory[5].title} </p>
-      <p>{context.updatedCategory[6] && context.updatedCategory[6].title} </p>
-      <p>{context.updatedCategory[7] && context.updatedCategory[7].title} </p>
+      <p>{category && category[5].title} </p>
+      <p>{category && category[6].title} </p>
+      <p>{category && category[7].title} </p>
     </div>
   );
   return (
@@ -35,21 +43,11 @@ const Dashboard = ({ location, context }) => {
           <span>Super Store- 7 Kolka..</span>
         </div>
         <div className="item">
-          <span>
-            {context.updatedCategory[0] && context.updatedCategory[0].title}{" "}
-          </span>
-          <span>
-            {context.updatedCategory[1] && context.updatedCategory[1].title}{" "}
-          </span>
-          <span>
-            {context.updatedCategory[2] && context.updatedCategory[2].title}{" "}
-          </span>
-          <span>
-            {context.updatedCategory[3] && context.updatedCategory[3].title}{" "}
-          </span>
-          <span>
-            {context.updatedCategory[4] && context.updatedCategory[4].title}{" "}
-          </span>
+          <span>{category && category[0].title} </span>
+          <span>{category && category[1].title} </span>
+          <span>{category && category[2].title} </span>
+          <span>{category && category[3].title} </span>
+          <span>{category && category[4].title} </span>
 
           <span
             onClick={() => {
@@ -69,15 +67,17 @@ const Dashboard = ({ location, context }) => {
           {dropdownItem}
         </div>
       )}
-      {location.state && (
-        <ProductReviews itemId={location.state._id} context={context} />
-      )}
-      <DashboardCard context={context} />
+      {location.state && <ProductReviews itemId={location.state._id} />}
+      <DashboardCard />
       <div className="category-container container">
-        <Category context={context} />
+        <Category />
       </div>
     </div>
   );
 };
+const mapStateToProps = (state) => ({
+  category: state.category.category,
+});
 
-export default withRouter(Dashboard);
+const DashboardConnect = connect(mapStateToProps, { getCategory })(Dashboard);
+export default withRouter(DashboardConnect);
