@@ -8,7 +8,7 @@
   width: 100%;
   background-color: white;
   box-shadow: 0 0 5px grey;
-  margin:0 -20px;
+  margin:0 -20px !important;
 }
 .market {
   display: flex;
@@ -21,7 +21,7 @@
   padding-left: 9px;
 }
 .item {
-  padding: 12px 12px 12px 12px;
+  padding: 12px;
   cursor: pointer;
 }
 .item span {
@@ -172,7 +172,6 @@
 }
 .product-slot {
   display: flex;
-  width: 100vw;
   height: 100vh;
   justify-content: space-between;
   background-color: white;

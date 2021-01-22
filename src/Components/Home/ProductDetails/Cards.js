@@ -2,7 +2,7 @@ import React from "react";
 import ProductButton from "./ProductButton";
 import { useHistory } from "react-router-dom";
 
-const Cards = ({ item, context }) => {
+const Cards = ({ item, index }) => {
   const { productName, images, unitPrice, unitType, unitStartPoint } = item;
   let history = useHistory();
 
@@ -28,7 +28,7 @@ const Cards = ({ item, context }) => {
           </ul>
         </div>
 
-        <ProductButton  item={item} />
+        <ProductButton item={item} index={index} />
       </div>
       <div className="emergency-update">v</div>
     </div>

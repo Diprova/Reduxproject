@@ -11,17 +11,13 @@ import { connect } from "react-redux";
 
 const Dashboard = ({
   location,
-  getProduct,
   getCategory,
-  category,
-  products,
+  category
 }) => {
   const [dropdownVisibility, setDropdownVisibility] = useState(false);
   useEffect(() => {
     getCategory();
   }, []);
-
-  console.log(category);
 
   const dropdownItem = (
     <div

@@ -24,7 +24,6 @@
   width: 40px;
   height: 40px;
   margin: 2px;
-  
 }
 .image {
   display: none;
@@ -70,16 +69,21 @@
   height: 5vh;
   margin: 14px 0 3px 0;
 }
-.wrap:hover{
+.wrap:hover {
   z-index: 1012;
 }
-.wrap input:focus,.searchButton:focus{
+.wrap input:focus,
+.searchButton:focus {
   z-index: 1012;
 }
 input {
   width: 100%;
   border-top-left-radius: 2px;
   border-bottom-left-radius: 2px;
+}
+input:focus {
+  cursor: auto;
+  padding: 0 8px;
 }
 .searchButton {
   cursor: pointer;
@@ -155,11 +159,9 @@ input {
   display: none;
 }
 /* --------CART WEB VIEW------------- */
-.cart-webView{
-  display:none;
+.cart-webView {
+  display: none;
 }
-
-
 
 /* ----------RESPONSIVE DESIGN----------------- */
 @media screen and (min-width: 1000px) {
@@ -168,6 +170,7 @@ input {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
+    margin: 0 auto !important;
   }
   .first-header {
     justify-content: inherit;
@@ -188,17 +191,18 @@ input {
   /* ------------------SEARCH BAR------------- */
   .wrap {
     width: auto;
-    margin:auto;
+    margin: auto;
   }
-  .wrap:hover{
+  .wrap:hover {
     z-index: 1012;
   }
-  .wrap input:focus,.searchButton:focus{
+  .wrap input:focus,
+  .searchButton:focus {
     z-index: 1012;
   }
   /* ------------CART----------- */
-  .first-header .cart{
-    display:none;
+  .first-header .cart {
+    display: none;
   }
 
   .cart-webView {

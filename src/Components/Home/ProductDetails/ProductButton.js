@@ -2,11 +2,6 @@ import React from "react";
 import {
   increment,
   decrement,
-  getItem,
-  addToCart,
-  removeFromCart,
-  addTotal,
-  removeFromTotal,
 } from "../../../redux/action/product";
 import { connect } from "react-redux";
 
@@ -14,21 +9,14 @@ const ProductButton = ({
   item,
   increment,
   decrement,
-  getItem,
-  addToCart,
-  removeFromCart,
-  addTotal,
-  removeFromTotal,
+  index,
 }) => {
   const handleIncrement = () => {
-    getItem(item._id), increment(),item.count===1 && addToCart(), addTotal();
+    increment({ index, id: item._id });
   };
 
   const handleDecrement = () => {
-    getItem(item._id),
-      decrement(),
-      item.count === 0 && removeFromCart(),
-      removeFromTotal();
+    decrement({ index, id: item._id });
   };
 
   const addbtn = (
@@ -57,11 +45,6 @@ const ProductButton = ({
 };
 
 const mapDispatchToProps = {
-  removeFromTotal,
-  addTotal,
-  removeFromCart,
-  addToCart,
-  getItem,
   decrement,
   increment,
 };

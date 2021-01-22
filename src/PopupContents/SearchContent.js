@@ -1,30 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "./popupContents.css";
-const SearchContent = ({ context, setSearchVisibility, searchVisibility }) => {
-  const [product, setProduct] = useState([]);
+import { getProduct } from "../redux/action/product";
+import { connect } from "react-redux";
 
+const SearchContent = ({
+  setSearchVisibility,
+  searchVisibility,
+  getProduct,
+  products,
+}) => {
   const showHideClassName = searchVisibility
     ? "modal display-block"
     : "modal display-none";
 
   let history = useHistory();
+  console.log(products);
+
   useEffect(() => {
-    setProduct([...context.products]);
+    getProduct();
   }, []);
-  useEffect(() => {
-    if (!context.products.length) {
-      context.getProduct();
-    }
-  }, [context.products]);
 
-  let product3 = context.updatedProducts.find(
-    (obj) => obj.productName === "Pachabale Banana"
-  );
+  let product3 =
+    products && products.find((obj) => obj.productName === "Pachabale Banana");
 
-  const mousehover = (e) => {
-    context.showItem(e);
-  };
 
   return (
     <div
@@ -35,22 +34,27 @@ const SearchContent = ({ context, setSearchVisibility, searchVisibility }) => {
     >
       <div className="search-content container">
         <div className="trending-template">TRENDING</div>
-        {product.map((element, index) => {
-          return (
-            <div
-              className="search-productContent"
-              onMouseOver={(e) => mousehover(element.productName)}
-              onClick={() =>
-                history.push({ pathname: "/dashboard", state: { ...element } })
-              }
-              onMouseLeave={null}
-              key={index}
-            >
-              <img src={element.images[0]} alt="img" className="search-img" />
-              <span className="search-productName">{element.productName}</span>
-            </div>
-          );
-        })}
+        {products &&
+          products.map((element, index) => {
+            return (
+              <div
+                className="search-productContent"
+                onClick={() =>
+                  history.push({
+                    pathname: "/dashboard",
+                    state: { ...element },
+                  })
+                }
+                onMouseLeave={null}
+                key={index}
+              >
+                <img src={element.images[0]} alt="img" className="search-img" />
+                <span className="search-productName">
+                  {element.productName}
+                </span>
+              </div>
+            );
+          })}
         <div className="trending-template">FREQUENT SEARCHES</div>
         <div className="search-productContent">
           <img src={product3.images[0]} alt="img" className="search-img" />
@@ -61,4 +65,8 @@ const SearchContent = ({ context, setSearchVisibility, searchVisibility }) => {
   );
 };
 
-export default SearchContent;
+const mapStateToProps = (state) => ({
+  products: state.product.products,
+});
+
+export default connect(mapStateToProps, { getProduct })(SearchContent);

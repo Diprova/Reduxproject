@@ -1,7 +1,6 @@
 import React, { Children, Component, useContext } from "react";
 import Rest from "../Utility/restapi";
 
-
 export const AppContext = React.createContext();
 
 const initialState = {
@@ -23,70 +22,14 @@ export class ContextApi extends Component {
     this.state = {
       ...initialState,
       location: "Select city",
-       
 
-     
+      // showItem: (item) => {
+      //   const showitem = this.state.updatedProducts.find(
+      //     (ele) => ele.productName === item
+      //   );
+      //   this.setState({ item: showitem.productName });
+      // },
 
-      showItem: (item) => {
-        const showitem = this.state.updatedProducts.find(
-          (ele) => ele.productName === item
-        );
-        this.setState({ item: showitem.productName });
-      },
-
-      
-
-      
-      addToCart: (id) => {
-        if (this.state.updatedProducts) {
-          const productIndex = this.state.getItem(id);
-          const product = this.state.updatedProducts[productIndex];
-          let cart = [...this.state.cart];
-          if (product.count === 1) {
-            cart.push(product);
-            this.setState({ cart });
-          }
-        }
-      },
-      removeFromCart: (id) => {
-        if (this.state.updatedProducts) {
-          const productIndex = this.state.getItem(id);
-          const product = this.state.updatedProducts[productIndex];
-          const cart = this.state.cart;
-          cart.pop(product);
-          this.setState({ cart: cart });
-        }
-      },
-      addTotal: (id) => {
-        if (this.state.updatedProducts) {
-          const productIndex = this.state.getItem(id);
-          const product = this.state.updatedProducts[productIndex];
-          product.total = product.count * product.unitPrice;
-
-          this.setState({
-            updatedProducts: [
-              ...this.state.updatedProducts.slice(0, productIndex),
-              product,
-              ...this.state.updatedProducts.slice(productIndex + 1),
-            ],
-          });
-        }
-      },
-      reduceFromTotal: (id) => {
-        if (this.state.updatedProducts) {
-          const productIndex = this.state.getItem(id);
-          const product = this.state.updatedProducts[productIndex];
-          product.total = product.count * product.unitPrice;
-
-          this.setState({
-            updatedProducts: [
-              ...this.state.updatedProducts.slice(0, productIndex),
-              product,
-              ...this.state.updatedProducts.slice(productIndex + 1),
-            ],
-          });
-        }
-      },
       login: async (email, password) => {
         let value = await Rest.post("/api/auth", { email, password });
         localStorage.setItem("token", value.data.token);

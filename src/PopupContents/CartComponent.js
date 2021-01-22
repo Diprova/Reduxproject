@@ -1,25 +1,20 @@
 import React from "react";
-import "../App.css";
-import {
-  removeFromCart,
-  increment,
-  decrement,
-  removeFromTotal,
-  addTotal,
-  getItem,
-} from "../redux/action/product";
+import "./popupContents.css";
+import { increment, decrement } from "../redux/action/product";
 import { connect } from "react-redux";
 
-const CartComponent = ({
-  getItem,
-  removeFromCart,
-  increment,
-  decrement,
-  removeFromTotal,
-  addTotal,
-  cart,
-}) => {
-  console.log(cart);
+const CartComponent = ({ increment, decrement, cart, index,products }) => {
+
+
+  const onClick=(item)=>{
+    let index=products.findIndex(e=>e._id===item._id);
+    increment({index,id:item._id})
+  }
+
+  const dOnClick=(item)=>{
+    let index=products.findIndex(e=>e._id===item._id);
+    decrement({index,id:item._id})
+  }
   return (
     <div className="cart-block">
       {cart.map((item) => {
@@ -30,20 +25,11 @@ const CartComponent = ({
               <h4>{item.productName}</h4>
             </div>
             <div className="cart-componentButton">
-              <button
-                onClick={() => (
-                  getItem(item._id),
-                  decrement(),
-                  item.count === 0 && removeFromCart(),
-                  removeFromTotal()
-                )}
-              >
+              <button onClick={() => dOnClick(item)}>
                 -
               </button>
               <span>{item.count}</span>
-              <button
-                onClick={() => (getItem(item._id), increment(), addTotal())}
-              >
+              <button onClick={()=>onClick(item)}>
                 +
               </button>
               <span className="price-details">
@@ -61,14 +47,11 @@ const CartComponent = ({
 
 const mapStateToProps = (state) => ({
   cart: state.product.cart,
+  products:state.product.products
 });
 
 const mapDispatchToProps = {
-  getItem,
   increment,
   decrement,
-  addTotal,
-  removeFromTotal,
-  removeFromCart,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(CartComponent);

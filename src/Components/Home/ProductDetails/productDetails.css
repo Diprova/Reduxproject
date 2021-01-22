@@ -9,6 +9,7 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
+  padding: 10px 0;
 }
 .product-link span {
   font-size:x-large;

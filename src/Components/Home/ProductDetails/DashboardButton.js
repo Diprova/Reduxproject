@@ -1,40 +1,43 @@
-import React, { useState } from "react";
+import React from "react";
+import { increment, decrement } from "../../../redux/action/product";
+import { connect } from "react-redux";
 
-const DashboardButton = ({ item, context }) => {
-  const [count, setCount] = useState(item.count);
+const DashboardButton = ({ item, products, increment, decrement }) => {
+  let itemIndex = products.findIndex((e) => e._id === item._id);
 
-  const increment = (e) => {
+  const incrementItem = (e) => {
     e.preventDefault();
-    return (
-      setCount(context.increment(item._id)),
-      context.addToCart(item._id),
-      context.addTotal(item._id)
-    );
+    increment({ index: itemIndex, id: item._id });
   };
 
-  const decrement = (e) => {
+  const decrementItem = (e) => {
     e.preventDefault();
-    return (
-      setCount(context.decrement(item._id)),
-      count === 1 && context.removeFromCart(item._id),
-      context.reduceFromTotal(item._id)
-    );
+    decrement({ index: itemIndex, id: item._id });
   };
 
   const addbutn = (
-    <button className="addbutn" onClick={increment}>
+    <button className="addbutn" onClick={incrementItem}>
       Add
     </button>
   );
 
   const cntrlbutn = (
     <div className="cntrlbutn">
-      <button onClick={decrement}>-</button>
-      <span>{count}</span>
-      <button onClick={increment}>+</button>
+      <button onClick={decrementItem}>-</button>
+      <span>{item.count}</span>
+      <button onClick={incrementItem}>+</button>
     </div>
   );
-  return <>{!count ? addbutn : cntrlbutn}</>;
+  return <div>{item.count === 0 ? addbutn : cntrlbutn}</div>;
 };
 
-export default DashboardButton;
+const mapStateToProps = (state) => ({
+  products: state.product.products,
+});
+
+const mapDispatchToProps = {
+  increment,
+  decrement,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardButton);

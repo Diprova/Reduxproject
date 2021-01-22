@@ -3,21 +3,27 @@ import DashboardButton from "../Components/Home/ProductDetails/DashboardButton";
 import { AiOutlineShop } from "react-icons/ai";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { useHistory } from "react-router-dom";
+import { getCategory } from "../redux/action/category";
+import { getProduct } from "../redux/action/product";
+import { connect } from "react-redux";
 
-const RouteProductDetails = ({ context }) => {
+const RouteProductDetails = ({
+  getCategory,
+  getProduct,
+  category,
+  products,
+}) => {
   const [dropdownVisibility, setDropdownVisibility] = useState(false);
-  const [product, setProduct] = useState([]);
 
   let history = useHistory();
 
   useEffect(() => {
-    setProduct([...context.products]);
+    getCategory();
   }, []);
+
   useEffect(() => {
-    if (!context.products.length) {
-      context.getProduct();
-    }
-  }, [context.products]);
+    getProduct();
+  }, []);
 
   const dropdownItem = (
     <div
@@ -26,9 +32,9 @@ const RouteProductDetails = ({ context }) => {
         setDropdownVisibility(false);
       }}
     >
-      <p>{context.updatedCategory[5] && context.updatedCategory[5].title} </p>
-      <p>{context.updatedCategory[6] && context.updatedCategory[6].title} </p>
-      <p>{context.updatedCategory[7] && context.updatedCategory[7].title} </p>
+      <p>{category && category[5].title} </p>
+      <p>{category && category[6].title} </p>
+      <p>{category && category[7].title} </p>
     </div>
   );
 
@@ -40,21 +46,11 @@ const RouteProductDetails = ({ context }) => {
           <span>Super Store- 7 Kolka..</span>
         </div>
         <div className="item">
-          <span>
-            {context.updatedCategory[0] && context.updatedCategory[0].title}{" "}
-          </span>
-          <span>
-            {context.updatedCategory[1] && context.updatedCategory[1].title}{" "}
-          </span>
-          <span>
-            {context.updatedCategory[2] && context.updatedCategory[2].title}{" "}
-          </span>
-          <span>
-            {context.updatedCategory[3] && context.updatedCategory[3].title}{" "}
-          </span>
-          <span>
-            {context.updatedCategory[4] && context.updatedCategory[4].title}{" "}
-          </span>
+          <span>{category && category[0].title} </span>
+          <span>{category && category[1].title} </span>
+          <span>{category && category[2].title} </span>
+          <span>{category && category[3].title} </span>
+          <span>{category && category[4].title} </span>
 
           <span
             onClick={() => {
@@ -74,7 +70,7 @@ const RouteProductDetails = ({ context }) => {
           {dropdownItem}
         </div>
       )}
-      <div className="product-slot container">
+      <div className="product-slot">
         <div className="category">
           <p>Fruites & Veggies</p>
           <p>Vegetables</p>
@@ -83,37 +79,41 @@ const RouteProductDetails = ({ context }) => {
         <div className="product-curtain container">
           <h4>Fruits & Veggies</h4>
           <div className="product-card">
-            {product.map((item) => {
-              return (
-                <div
-                  key={item._id}
-                  className="dashboardCard-content container"
-                  onClick={() =>
-                    history.push({
-                      pathname: "/dashboard",
-                      state: { ...item },
-                    })
-                  }
-                >
-                  <div>
-                    <img src={item.images[0]} alt="image" />
-                    <ul style={{ listStyleType: "none", color: "#534e52" }}>
-                      <li>
-                        <h6>{item.productName}</h6>
-                      </li>
-                      <li> ₹ {item.unitPrice}</li>
-                      <li>
-                        {item.unitStartPoint}
-                        {item.unitType}
-                      </li>
-                    </ul>
+            {products &&
+              products.map((item) => {
+                return (
+                  <div
+                    key={item._id}
+                    className="dashboardCard-content container"
+                  >
+                    <div>
+                      <img
+                        src={item.images[0]}
+                        alt="image"
+                        onClick={() =>
+                          history.push({
+                            pathname: "/dashboard",
+                            state: { ...item },
+                          })
+                        }
+                      />
+                      <ul style={{ listStyleType: "none", color: "#534e52" }}>
+                        <li>
+                          <h6>{item.productName}</h6>
+                        </li>
+                        <li> ₹ {item.unitPrice}</li>
+                        <li>
+                          {item.unitStartPoint}
+                          {item.unitType}
+                        </li>
+                      </ul>
+                    </div>
+                    <span>
+                      <DashboardButton item={item} />
+                    </span>
                   </div>
-                  <span>
-                    <DashboardButton item={item} context={context} />
-                  </span>
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
         </div>
       </div>
@@ -121,4 +121,17 @@ const RouteProductDetails = ({ context }) => {
   );
 };
 
-export default RouteProductDetails;
+const mapStateToProps = (state) => ({
+  category: state.category.category,
+  products: state.product.products,
+});
+
+const mapDispatchToProps = {
+  getCategory,
+  getProduct,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RouteProductDetails);

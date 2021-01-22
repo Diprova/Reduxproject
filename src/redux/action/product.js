@@ -1,13 +1,4 @@
-import {
-  GET_PRODUCT,
-  INCREMENT,
-  DECREMENT,
-  GET_ITEM,
-  ADD_TOCART,
-  REMOVE_FROMCART,
-  ADD_TOTAL,
-  REMOVE_FROMTOTAL,
-} from "./types";
+import { GET_PRODUCT, INCREMENT, DECREMENT } from "./types";
 import axios from "axios";
 
 export const getProduct = () => async (dispatch) => {
@@ -21,46 +12,12 @@ export const getProduct = () => async (dispatch) => {
   }
 };
 
-export const getItem = (id) => (dispatch) => {
-  try {
-    dispatch({ type: GET_ITEM, payload: id });
-  } catch (err) {}
+export const increment = (payload) => (dispatch) => {
+  dispatch({ type: INCREMENT, payload });
 };
 
-export const increment = (itemId) => (dispatch) => {
-  try {
-    dispatch({
-      type: INCREMENT,
-      payload: itemId,
-    });
-  } catch (err) {}
+export const decrement = (payload) => (dispatch) => {
+  dispatch({ type: DECREMENT, payload });
 };
 
-export const decrement = (itemId) => (dispatch) => {
-  try {
-    dispatch({ type: DECREMENT, payload: itemId });
-  } catch (err) {}
-};
 
-export const addToCart = (id) => (dispatch) => {
-  try {
-    dispatch({ type: ADD_TOCART, payload: id });
-  } catch (error) {}
-};
-
-export const removeFromCart = (id) => (dispatch) => {
-  try {
-    dispatch({ type: REMOVE_FROMCART, payload: id });
-  } catch (error) {}
-};
-export const addTotal = (id) => (dispatch) => {
-  try {
-    dispatch({ type: ADD_TOTAL, payload: id });
-  } catch (error) {}
-};
-
-export const removeFromTotal = (id) => (dispatch) => {
-  try {
-    dispatch({ type: REMOVE_FROMTOTAL, payload: id });
-  } catch (error) {}
-};

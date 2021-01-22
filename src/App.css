@@ -20,7 +20,7 @@ body::-webkit-scrollbar {
   .container {
     padding: 0 auto;
     max-width: 1280px;
-    margin: auto;
+    margin: 0 auto 15px auto;
   }
 }
 input,

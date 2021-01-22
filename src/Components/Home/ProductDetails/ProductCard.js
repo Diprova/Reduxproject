@@ -24,8 +24,8 @@ const ProductCard = ({ getProduct, products }) => {
       </div>
       <div className="productCard container">
         {products &&
-          products.map((item) => {
-            return <Cards key={item._id} item={item} />;
+          products.map((item,index) => {
+            return <Cards key={item._id} item={item} index={index}/>;
           })}
         <div className="seeAll-card">
           <button
@@ -41,6 +41,6 @@ const ProductCard = ({ getProduct, products }) => {
 };
 
 const mapStateToProps = (state) => ({
-  products: state.product.updatedProducts,
+  products: state.product.products,
 });
 export default connect(mapStateToProps, { getProduct })(ProductCard);

@@ -9,7 +9,6 @@ const Cartcontent = ({ cartVisibility, setCartVisibility, cart }) => {
   const showHideClassName = cartVisibility
     ? "modal display-block"
     : "modal display-none";
-  console.log(cart)
   let subtotal = cart.reduce((n, { total }) => n + total + 49, 0);
 
   return (

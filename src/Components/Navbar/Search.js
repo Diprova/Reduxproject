@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
+import { getProduct } from "../../redux/action/product";
+import { connect } from "react-redux";
 
-const Search = ({ context, setSearchVisibility, searchVisibility }) => {
+const Search = ({
+  setSearchVisibility,
+  searchVisibility,
+  getProduct,
+  products,
+  show,
+}) => {
   const [keyPress, setKeyPress] = useState(false);
   const [index, setIndex] = useState(0);
-  const [product, setProduct] = useState([]);
   let history = useHistory();
 
+
   useEffect(() => {
-    if (context.products.length) {
-      setProduct([...context.products]);
-    }
-  }, [context.products]);
+    getProduct();
+  }, []);
 
   const keydown = (e) => {
     if (e.keyCode === 40) {
@@ -30,8 +36,8 @@ const Search = ({ context, setSearchVisibility, searchVisibility }) => {
       }
     } else {
       if (e.keyCode === 13) {
-        const item = product.find(
-          (elemnt) => elemnt.productName === product[index].productName
+        const item = products.find(
+          (elemnt) => elemnt.productName === products[index].productName
         );
         history.push({ pathname: "/dashboard", state: { ...item } });
         setSearchVisibility(false);
@@ -53,11 +59,11 @@ const Search = ({ context, setSearchVisibility, searchVisibility }) => {
       )}
       <input
         type="search"
-        placeholder={!context.item ? "Search for products" : context.item}
-        value={keyPress ? product[index].productName : ""}
+        placeholder="Search for products" 
+        onChange={keydown}
+        value={keyPress ? products[index].productName : ""}
         onKeyUp={(e) => onkeyup(e)}
         onKeyDown={(e) => keydown(e)}
-        onKeyPress={(e) => keyEnter(e)}
         onClick={() => setSearchVisibility(true)}
       />
 
@@ -67,4 +73,10 @@ const Search = ({ context, setSearchVisibility, searchVisibility }) => {
     </div>
   );
 };
-export default Search;
+
+const mapStateToProps = (state) => ({
+  products: state.product.products,
+  show: state.product.show,
+});
+
+export default connect(mapStateToProps, { getProduct })(Search);

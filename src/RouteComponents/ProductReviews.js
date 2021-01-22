@@ -2,49 +2,46 @@ import React, { useState, useEffect } from "react";
 import refund from "../assets/return.webp";
 import lowestPrice from "../assets/lowest-price.webp";
 import "./stylesRoute.css";
+import { increment, decrement } from "../redux/action/product";
+import { connect } from "react-redux";
 
-const ProductReviews = ({ itemId, products, item }) => {
+const ProductReviews = ({ itemId, products, increment, decrement, index }) => {
   const [itemDetails, setitemDetails] = useState({});
 
+  let incrementIndex = products.findIndex((e) => e._id === itemId);
+
   useEffect(() => {
-    setitemDetails(products.find((e) => e._id === itemId));
-  }, []);
+    setitemDetails(products[incrementIndex]);
+  }, [products[incrementIndex]]);
 
   useEffect(() => {
     if (products._id !== itemId) {
-      setitemDetails(products.find((e) => e._id === itemId));
+      setitemDetails(products[incrementIndex]);
     }
   }, [itemId]);
-  console.log(itemDetails);
 
-  const increment = () => {
-    setitemDetails({ ...itemDetails, count: itemDetails.count + 1 });
-    context.increment(itemId);
-    context.addToCart(itemId);
-    context.addTotal(itemId);
+  const incrementItem = () => {
+    increment({ index: incrementIndex, id: itemId });
   };
 
-  const decrement = () => {
-    setitemDetails({ ...itemDetails, count: itemDetails.count - 1 });
-    context.decrement(itemId);
-    itemDetails.count === 1 && context.removeFromCart(itemId);
-    context.reduceFromTotal(itemId);
+  const decrementItem = () => {
+    decrement({ index:incrementIndex, id: itemId });
   };
 
   const addbutton = (
-    <button className="cart-button" onClick={increment}>
+    <button className="cart-button" onClick={incrementItem}>
       Add Cart
     </button>
   );
 
   const controlButton = (
     <div className="cart-componentButton">
-      <button onClick={decrement}>-</button>
+      <button onClick={decrementItem}>-</button>
       <span>{itemDetails.count}</span>
-      <button onClick={increment}>+</button>
+      <button onClick={incrementItem}>+</button>
     </div>
   );
-  console.log(context.user);
+
   return (
     <div>
       {itemDetails.productName !== undefined && (
@@ -75,23 +72,24 @@ const ProductReviews = ({ itemId, products, item }) => {
               {itemDetails.unitStartPoint}
               {itemDetails.unitType}
             </div>
-            {!itemDetails.count ? addbutton : controlButton}
+            {itemDetails.count === 0 ? addbutton : controlButton}
             <div className="easy-returns">
               <h6>Why shop from Grofers?</h6>
               <div className="refund">
                 <img src={refund} alt="img" />
                 <div>
-                <p>Easy returns & refunds</p>
-                <p>Return products at doorstep and get refund in seconds.</p>
+                  <p>Easy returns & refunds</p>
+                  <p>Return products at doorstep and get refund in seconds.</p>
                 </div>
               </div>
               <div className="lowest-price">
                 <img src={lowestPrice} alt="img" />
                 <div>
-                <p>Lowest price guaranteed</p>
-                <p>
-                  Get difference refunded if you find it cheaper anywhere else.
-                </p>
+                  <p>Lowest price guaranteed</p>
+                  <p>
+                    Get difference refunded if you find it cheaper anywhere
+                    else.
+                  </p>
                 </div>
               </div>
             </div>
@@ -102,4 +100,13 @@ const ProductReviews = ({ itemId, products, item }) => {
   );
 };
 
-export default ProductReviews;
+const mapStateToProps = (state) => ({
+  products: state.product.products,
+});
+
+const mapDispatchToProps = {
+  increment,
+  decrement,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductReviews);
