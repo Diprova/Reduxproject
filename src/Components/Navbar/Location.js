@@ -1,10 +1,14 @@
 import React from "react";
+import { connect } from "react-redux";
 
-const Location = ({ setLocationVisibility, context }) => {
+const Location = ({ setLocationVisibility, location }) => {
   return (
     <div className="location" onClick={() => setLocationVisibility(true)}>
-      <p className="element">{context.location}</p>
+      <p className="element">{location}</p>
     </div>
   );
 };
-export default Location;
+const mapStateToProps = (state) => ({
+  location: state.location.location,
+});
+export default connect(mapStateToProps, null)(Location);

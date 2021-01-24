@@ -1,4 +1,4 @@
-import { GET_PRODUCT, INCREMENT, DECREMENT } from "./types";
+import { GET_PRODUCT, INCREMENT, DECREMENT,LOCATION } from "./types";
 import axios from "axios";
 
 export const getProduct = () => async (dispatch) => {
@@ -19,5 +19,6 @@ export const increment = (payload) => (dispatch) => {
 export const decrement = (payload) => (dispatch) => {
   dispatch({ type: DECREMENT, payload });
 };
+
 
 

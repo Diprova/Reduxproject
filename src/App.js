@@ -1,24 +1,34 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import Footer from "./Components/Footer/Footer";
 import Header from "./Components/Navbar/Header";
 import PrimaryRoute from "./Route/PrimaryRoute";
 import "./App.css";
-import { AppContext } from "./Route/ContextApi";
+import Alert from "./PopupContents/Alert";
+import { connect } from "react-redux";
+import store from "./redux/store";
+import setAuthToken from "./Utility/setAuthToken";
+import { loadUsers } from "./redux/action/auth";
 
-const App = () => {
-  const context = useContext(AppContext);
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 
+const App = ({ alerts }) => {
   useEffect(() => {
-    context.loadUser();
-  }, []);
+    store.dispatch(loadUsers());
+  });
 
   return (
-    <>
+    <div>
       <Header />
+      {alerts.length > 0 && <Alert />}
       <PrimaryRoute />
       <Footer />
-    </>
+    </div>
   );
 };
-export default App;
+const mapStateToProps = (state) => ({
+  alerts: state.alert,
+});
 
+export default connect(mapStateToProps, null)(App);

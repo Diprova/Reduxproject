@@ -1,47 +1,34 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
+import { setAlert } from "../redux/action/alert";
+import { login } from "../redux/action/auth";
+import { connect } from "react-redux";
 
-const Login = ({ context }) => {
+const Login = ({ login, isAuthenticated, setAlert }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const [popupAlert, setPopupAlert] = useState(false);
 
   const { email, password } = formData;
-  let history = useHistory();
 
-  useEffect(() => {
-    if (!context.user) {
-      context.login();
-      context.loadUser();
-    }
-  }, [context.user]);
-
-  const submitHandler = async (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
-    await context.login(email, password);
-    console.log(formData);
-    console.log(context.user);
-    console.log(localStorage.getItem("token"));
-    if (localStorage.token !=="undefined") {
-      context.loadUser();
-      history.push("/");
-    } else {
-      setPopupAlert(true);
-    }
+    login(email, password);
   };
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  if (isAuthenticated) {
+    return <Redirect to="/" />;
+  }
   return (
     <div className="login-formContainer container">
-      <form className="form container" onSubmit={(e) => submitHandler(e)}>
+      <form className="form" onSubmit={(e) => submitHandler(e)}>
         <h5>Login</h5>
-        {popupAlert && <p className="alert"> Invalid Credentials</p>}
         <div>
-          <p>Email:</p>
+          <label>Email:</label>
           <input
             type="email"
             name="email"
@@ -50,7 +37,7 @@ const Login = ({ context }) => {
           />
         </div>
         <div>
-          <p>Password:</p>
+          <label>Password:</label>
           <input
             type="password"
             name="password"
@@ -59,10 +46,18 @@ const Login = ({ context }) => {
           />
         </div>
 
-        <button type="submit">Submit</button>
+        <input className="submit" value="SUBMIT" />
       </form>
     </div>
   );
 };
 
-export default Login;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+const mapDispatchToProps = {
+  login,
+  setAlert,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

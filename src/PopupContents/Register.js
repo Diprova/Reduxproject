@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Rest from "../Utility/restapi";
-import { useHistory } from "react-router-dom";
-import { useAlert } from "react-alert";
+import { useHistory, Redirect } from "react-router-dom";
+import { register } from "../redux/action/auth";
+import { connect } from "react-redux";
+import { setAlert } from "../redux/action/alert";
 
-const Configuration = () => {
-  const [pwdalert, setPwdAlert] = useState(false);
+const Configuration = ({ register, isAuthenticated, setAlert }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -13,46 +13,30 @@ const Configuration = () => {
   });
 
   const { name, email, password, password2 } = formData;
-  const alert = useAlert();
 
   let history = useHistory();
 
-  let errors;
-
-  const submitHandler = async (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
-    console.log(formData);
     if (password !== password2) {
-      setPwdAlert(true);
+      setAlert("Password did not match", "danger");
     } else {
-      let value = await Rest.post("/api/users", { name, email, password });
-
-      if (value.status >= 200 && value.status <= 300) {
-        history.push("/login");
-      } else {
-        setPopupAlert(true);
-        let resError = value.data.errors;
-        errors = resError.map((e) => {
-          return e.msg;
-        });
-        alert.show(<div style={{color:"red"}}>{errors.toString()}</div>);
-      }
+      register(name, email, password);
     }
   };
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  if (isAuthenticated) {
+    return <Redirect to="/" />;
+  }
   return (
     <div className="form-container container">
       <form className="form container" onSubmit={(e) => submitHandler(e)}>
         <h5>Sign Up</h5>
-        {pwdalert && (
-          <p className="alert">
-            {password !== password2 && "Your password does not match"}
-          </p>
-        )}
         <div>
-          <p>Name:</p>
+          <label>Name:</label>
           <input
             type="text"
             value={name}
@@ -61,7 +45,7 @@ const Configuration = () => {
           />
         </div>
         <div>
-          <p>Email:</p>
+          <label>Email:</label>
           <input
             type="email"
             name="email"
@@ -70,7 +54,7 @@ const Configuration = () => {
           />
         </div>
         <div>
-          <p>Password:</p>
+          <label>Password:</label>
           <input
             type="password"
             name="password"
@@ -79,7 +63,7 @@ const Configuration = () => {
           />
         </div>
         <div>
-          <p>Confirm Password:</p>
+          <label>Confirm Password:</label>
           <input
             type="password"
             name="password2"
@@ -87,7 +71,8 @@ const Configuration = () => {
             onChange={(e) => onChange(e)}
           />
         </div>
-        <button type="submit">Submit</button>
+        <input className="submit" type="submit" value="REGISTER" />
+
         <span>
           Already a user?
           <span className="login-butn" onClick={() => history.push("/login")}>
@@ -99,4 +84,13 @@ const Configuration = () => {
   );
 };
 
-export default Configuration;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+const mapDispatchToProps = {
+  register,
+  setAlert,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Configuration);

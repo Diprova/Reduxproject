@@ -9,7 +9,6 @@ import SearchContent from "../../PopupContents/SearchContent";
 import Authentication from "./Authentication";
 import MyCart from "./MyCart";
 import "./styles.css";
-import { AppConsumer } from "../../Route/ContextApi";
 import Menubar from "./Menubar";
 import MenubarContent from "../../PopupContents/MenubarContent";
 
@@ -21,8 +20,6 @@ const Header = () => {
   const [menubarVisibility, setMenubarVisibility] = useState(false);
 
   return (
-    <AppConsumer>
-      {(context) => (
         <div className="header container">
           <div className="first-header">
             <Menubar setMenubarVisibility={setMenubarVisibility} />
@@ -36,13 +33,11 @@ const Header = () => {
 
             <Location
               setLocationVisibility={setLocationVisibility}
-              context={context}
             />
             {locationVisibility && (
               <LocationContent
                 locationVisibility={locationVisibility}
                 setLocationVisibility={setLocationVisibility}
-                context={context}
               />
             )}
             <MyCart setCartVisibility={setCartVisibility} />
@@ -50,18 +45,15 @@ const Header = () => {
               <Cartcontent
                 cartVisibility={cartVisibility}
                 setCartVisibility={setCartVisibility}
-                context={context}
               />
             )}
           </div>
           <Search
             setSearchVisibility={setSearchVisibility}
             searchVisibility={searchVisibility}
-            context={context}
           />
           {searchVisibility && (
             <SearchContent
-              context={context}
               setSearchVisibility={setSearchVisibility}
               searchVisibility={searchVisibility}
             />
@@ -79,13 +71,10 @@ const Header = () => {
               <Cartcontent
                 cartVisibility={cartVisibility}
                 setCartVisibility={setCartVisibility}
-                context={context}
               />
             )}
           </div>
         </div>
-      )}
-    </AppConsumer>
   );
 };
 export default Header;

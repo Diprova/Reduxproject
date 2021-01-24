@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import kolkata from "../assets/kolkata.png";
 import bangalore from "../assets/bangalore.jpg";
 import "./popupContents.css";
+import { locationWork } from "../redux/action/location";
+import { connect } from "react-redux";
 
 const LocationContent = ({
   locationVisibility,
   setLocationVisibility,
-  context,
+  locationWork,
 }) => {
   const showHideClassName = locationVisibility
     ? "modal display-block"
     : "modal display-none";
+
+ 
+
   return (
     <div
       className={showHideClassName}
@@ -24,7 +29,7 @@ const LocationContent = ({
               src={kolkata}
               alt="img"
               onClick={() => (
-                setLocationVisibility(false), (context.location = "Kolkata")
+                setLocationVisibility(false), (locationWork({location : "Kolkata"}))
               )}
             />
             <p>Kolkata</p>
@@ -34,7 +39,7 @@ const LocationContent = ({
               src={bangalore}
               alt="img"
               onClick={() => (
-                setLocationVisibility(false), (context.location = "Bangalore")
+                setLocationVisibility(false), (locationWork({location : "Bangalore"}))
               )}
             />
             <span>Bangalore</span>
@@ -45,4 +50,7 @@ const LocationContent = ({
   );
 };
 
-export default LocationContent;
+const mapStateToProps = (state) => ({
+  location: state.location.location,
+});
+export default connect(mapStateToProps,{locationWork})(LocationContent);

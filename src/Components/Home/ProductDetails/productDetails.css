@@ -151,7 +151,7 @@
   font-weight: monospace;
   background-color: white;
   border: 1px solid rgb(232, 223, 223);
-  margin:0 -20px;
+  margin:0 -20px !important;
 }
 .dashboard-card::-webkit-scrollbar {
   width: 0 !important;

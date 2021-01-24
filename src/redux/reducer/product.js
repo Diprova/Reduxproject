@@ -1,4 +1,4 @@
-import { GET_PRODUCT, INCREMENT, DECREMENT } from "../action/types";
+import { GET_PRODUCT, INCREMENT, DECREMENT,LOCATION } from "../action/types";
 
 const initialState = {
   products: [],
@@ -74,6 +74,7 @@ export default function (state = initialState, action) {
         ],
         cart: decrementCartItem,
       };
+     
       
 
     default:

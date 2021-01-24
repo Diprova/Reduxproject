@@ -57,7 +57,7 @@
   width: 100vw;
   margin-bottom: 10px;
   padding: 90px 0 10px 0;
-  margin:0 -20px;
+  margin:0 -20px 10px -20px !important;
 }
 .review-categoryName {
   font-size: 20px;
@@ -69,7 +69,9 @@
 .item-review {
   display: flex;
   flex-flow: column wrap;
+  margin:20px auto !important;
 }
+
 .item-rating h6 {
   font-size: 20px;
   font-weight: 500;
@@ -86,7 +88,7 @@
 }
 
 .item-price {
-  margin: 20px auto;
+  margin: 70px auto !important;
 }
 .productPrice {
   font-size: 25px;
