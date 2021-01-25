@@ -367,6 +367,31 @@
 .alertLine {
   padding: 20px 10px;
 }
+/* ----------------PAYMENT-------------- */
+.payment{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: azure;
+  height:82vh;
+}
+.payment-box{
+  width:600px;
+  background-color: rgb(228, 153, 168);
+  color: white;
+  padding:40px !important;
+}
+.payment-box button{
+  width:100px;
+  margin:20px 40%;
+  background-color:crimson;
+  color:white;
+  font-weight: 600;
+  font-size: xx-large;
+  padding:5px;
+
+
+}
 /* --------------RESPONSIVE DESIGN----------------------- */
 
 @media screen and (min-width: 1000px) {

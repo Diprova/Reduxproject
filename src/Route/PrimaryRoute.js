@@ -6,6 +6,7 @@ import RouteProductDetails from "../RouteComponents/RouteProductDetails";
 import Register from "../PopupContents/Register";
 import Login from "../PopupContents/Login";
 import Payment from "../PopupContents/Payment";
+import PrivateRoute from "./PrivateRoute";
 
 const PrimaryRoute = () => {
   return (
@@ -19,7 +20,7 @@ const PrimaryRoute = () => {
       />
       <Route exact path="/login" component={Login} />
       <Route exact path="/register" component={Register} />
-      <Route exact path="/payment" component={Payment} />
+      <PrivateRoute exact path="/payment" component={Payment} />
     </Switch>
   );
 };

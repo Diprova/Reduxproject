@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import CartComponent from "./CartComponent";
 import emptyCart from "../assets/empty-cart.webp";
+import { useHistory } from "react-router-dom";
 import "./popupContents.css";
 import { connect } from "react-redux";
 
@@ -10,6 +11,8 @@ const Cartcontent = ({ cartVisibility, setCartVisibility, cart }) => {
     ? "modal display-block"
     : "modal display-none";
   let subtotal = cart.reduce((n, { total }) => n + total + 49, 0);
+
+  let history = useHistory();
 
   return (
     <div className={showHideClassName} onClick={() => setCartVisibility(false)}>
@@ -28,10 +31,7 @@ const Cartcontent = ({ cartVisibility, setCartVisibility, cart }) => {
         ) : (
           <div>
             <div className="cart-total">
-              <h3>
-                Cart Total:{" "}
-                {cart.reduce((n, { total }) => n + total, 0)}
-              </h3>
+              <h3>Cart Total: {cart.reduce((n, { total }) => n + total, 0)}</h3>
               <p>Delivery Charges: ₹ 49</p>
               <div>Subtotal : {subtotal}</div>
             </div>
@@ -46,7 +46,10 @@ const Cartcontent = ({ cartVisibility, setCartVisibility, cart }) => {
             Start Shopping
           </button>
         ) : (
-          <button className="checkout-button">
+          <button
+            className="checkout-button"
+            onClick={() => history.push("/payment")}
+          >
             <p>Proceed to Checkout:</p>
             <p>{subtotal}</p>
           </button>

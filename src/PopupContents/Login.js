@@ -46,7 +46,7 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
           />
         </div>
 
-        <input className="submit" value="SUBMIT" />
+        <input className="submit" type="submit" value="SUBMIT" />
       </form>
     </div>
   );
