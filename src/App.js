@@ -19,12 +19,12 @@ const App = ({ alerts }) => {
   });
 
   return (
-    <div>
+    <>
       <Header />
       {alerts.length > 0 && <Alert />}
       <PrimaryRoute />
       <Footer />
-    </div>
+    </>
   );
 };
 const mapStateToProps = (state) => ({

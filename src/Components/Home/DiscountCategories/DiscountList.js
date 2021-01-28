@@ -18,7 +18,7 @@ const DiscountList = ({ item }) => {
       >
         <img src={images[0]} alt="images" />
         <div className="listDetails">
-          <p>{productName}</p>
+          <h2>{productName}</h2>
           <p>{description}</p>
         </div>
         <div

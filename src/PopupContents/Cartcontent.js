@@ -15,7 +15,7 @@ const Cartcontent = ({ cartVisibility, setCartVisibility, cart }) => {
   let history = useHistory();
 
   return (
-    <div className={showHideClassName} onClick={() => setCartVisibility(false)}>
+    <div className={showHideClassName}>
       <div className="cart-content container">
         <button className="cartcontent-button">
           My Cart
